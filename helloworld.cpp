@@ -8,14 +8,15 @@ int main()
 
    int n;
    cin >> n;
-   if (n<1 || n >30)
-       return 0;
+   double sum =0;
+   int man = 0;
    for (int i = 0; i < n; i++)
    {
-       int temp;
-       cin >> temp;
-       if (temp >= 0) {
-           printf("%d ", i + 1);
-       }
+       double temp;
+       int hs;
+       cin >> temp >> hs;
+       sum += temp*hs;
+       man += hs;
    }
+   printf("%.2f", sum / man);
 }
