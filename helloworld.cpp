@@ -1,12 +1,12 @@
-#include <stdio.h>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main(){
-    int n=2;
+    int n;
+    cin >> n;
     double sum=0;
     for (int i=1; i<=n;i++) {
-        sum += ((double)n)/((double)n+1);
+        sum += ((double)i)/(i+1);
     }
     printf("%.5f",sum);
 }
