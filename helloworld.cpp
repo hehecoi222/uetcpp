@@ -9,23 +9,14 @@ int main()
     int n;
     cin >> n;
 
-    int sum = 1;
-    for (int i = 2; i < sqrt(n); i++)
-    {
-        if (n % i == 0)
-        {
-            sum += i + n / i;
-            if (sum > n)
-            {
-                printf("no");
-                return 0;
-            }
+    int dem=0;
+    for (;n!=0;){
+        if (n % 2==0) {
+            n /= 2;
+            dem++;
+        } else {
+            n--;
         }
     }
-    if (sum = n)
-    {
-        printf("yes");
-    }
-    else
-        printf("no");
+    printf("%d", dem);
 }
