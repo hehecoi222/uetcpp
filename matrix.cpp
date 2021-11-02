@@ -26,7 +26,6 @@ void OutMat(int A[M][N], int r, int c)
     }
 }
 
-// function to produce the addition between 2 matrixes
 void SumMat(int A[M][N], int B[M][N], int C[M][N], int r, int c)
 {
     for (int i = 0; i < r; i++)
@@ -38,9 +37,13 @@ void SumMat(int A[M][N], int B[M][N], int C[M][N], int r, int c)
     }
 }
 
-// function to multiply 2 matrixes
-void MultiplyMat(int A[M][N], int B[M][N], int C[M][N], int r, int c)
+bool MultiplyMat(int A[M][N], int B[M][N], int C[M][N], int r, int c)
 {
+    if (r != c)
+    {
+        printf("Can't multiply");
+        return false;
+    }
     for (int i = 0; i < r; i++)
     {
         for (int j = 0; j < c; j++)
@@ -52,6 +55,7 @@ void MultiplyMat(int A[M][N], int B[M][N], int C[M][N], int r, int c)
             }
         }
     }
+    return true;
 }
 
 int main()
@@ -59,10 +63,20 @@ int main()
     int A[M][N];
     int B[M][N];
     int m, n;
+    printf("How many row and column:");
     cin >> m >> n;
+    printf("Enter the first matrix:\n");
     InMat(A, m, n);
+    printf("Enter the second matrix:\n");
     InMat(B, m, n);
     int Sum[M][N];
     SumMat(A, B, Sum, m, n);
+    printf("Sum of the matrixes:\n");
     OutMat(Sum, m, n);
+    int Multiply[M][N];
+    if (MultiplyMat(A, B, Multiply, m, n))
+    {
+        printf("Multiply of the matrixes:\n");
+        OutMat(Multiply, m, n);
+    }
 }
