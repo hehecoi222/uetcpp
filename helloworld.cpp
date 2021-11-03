@@ -1,36 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int InMat(vector<vector<int>> mat, int m,int n) {
-    for (int i=0;i<m;i++){
-        vector<int> temp;
-        for (int j=0;j<n;j++){
-            int tempNum;
-            cin >> tempNum;
-            temp.push_back(tempNum);
-        }
-        mat.push_back(temp);
+long SumofSquare(int n) {
+    if (n==1) {
+        return 1;
+    } else {
+        return n*n + SumofSquare(n-1);
     }
-    return 0;
-}
-
-int OutMat(vector<vector<int>> mat, int m,int n) {
-    for (int i=0;i<m;i++){
-        for (int j=0;j<n;j++){
-            cout << mat[i][j] << " ";
-        }
-        cout << endl;
-    }
-    return 0;
 }
 
 int main() {
-    vector<vector<int>> Set;
-    int n, m;
-    printf("Please input the number of rows and columns: ");
-    cin >> m >> n;
-    printf("Please input the matrix: ");
-    InMat(Set, m, n);
-    printf("The matrix is: ");
-    OutMat(Set, m, n);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n;
+    cin >> n;
+    cout << SumofSquare(n);
 }
