@@ -1,19 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long SumofSquare(int n) {
-    if (n==1) {
-        return 1;
-    } else {
-        return n*n + SumofSquare(n-1);
-    }
-}
+
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n;
-    cin >> n;
-    cout << SumofSquare(n);
+    int a,b;
+    cin >> a >> b;
+    long Power = pow(a,b);
+    cout << Power;
 }
