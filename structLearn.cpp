@@ -7,33 +7,37 @@ struct DiemSo {
 
 struct SinhVien {
     string HoTen;
-    int NamSinh;
+    string NamSinh;
+    int SBD;
     DiemSo Diem;
 };
 
 int main() {
-    const int SoSV = 10;
+    const int SoSV = 3;
     SinhVien SV[SoSV];
     for (int i = 0; i < SoSV; i++) {
         cout << "Nhap thong tin sinh vien thu " << i + 1 << endl;
-        cout << "Ho ten: ";
+        cout << "Nhap ho ten: ";
         getline(cin, SV[i].HoTen);
-        cout << "Nam sinh: ";
-        cin >> SV[i].NamSinh;
-        cin.ignore();
-        cout << "Diem toan: ";
+        cout << "Nhap nam sinh: ";
+        getline(cin, SV[i].NamSinh);
+        cout << "Nhap so bao danh: ";
+        cin >> SV[i].SBD;
+        cout << "Nhap diem toan: ";
         cin >> SV[i].Diem.Toan;
-        cout << "Diem ly: ";
+        cout << "Nhap diem ly: ";
         cin >> SV[i].Diem.Ly;
+        cin.ignore();
         SV[i].Diem.DiemTB = (SV[i].Diem.Toan + SV[i].Diem.Ly) / 2;
     }
     cout << "Thong tin sinh vien" << endl;
     for (int i = 0; i < SoSV; i++) {
         cout << "Ho ten: " << SV[i].HoTen << endl;
         cout << "Nam sinh: " << SV[i].NamSinh << endl;
+        cout << "So bao danh: " << SV[i].SBD << endl;
         cout << "Diem toan: " << SV[i].Diem.Toan << endl;
         cout << "Diem ly: " << SV[i].Diem.Ly << endl;
-        cout << "Diem TB: " << SV[i].Diem.DiemTB << endl;
+        cout << "Diem trung binh: " << SV[i].Diem.DiemTB << endl;
     }
     return 0;
 }
