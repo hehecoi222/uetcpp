@@ -1,43 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct DiemSo {
-    double Toan,Ly,DiemTB;
+struct Vector {
+    double X, Y;
+    int VectorAddition(Vector &v) {
+        X += v.X;
+        Y += v.Y;
+        return 0;
+    }
 };
 
-struct SinhVien {
-    string HoTen;
-    string NamSinh;
-    int SBD;
-    DiemSo Diem;
-};
+int Nhap(Vector &v) {
+    cout << "Nhap toa do X: ";
+    cin >> v.X;
+    cout << "Nhap toa do Y: ";
+    cin >> v.Y;
+    return 0;
+}
+
+int Xuat(Vector v) {
+    cout << "(" << v.X << ", " << v.Y << ")" << endl;
+    return 0;
+}
 
 int main() {
-    const int SoSV = 3;
-    SinhVien SV[SoSV];
-    for (int i = 0; i < SoSV; i++) {
-        cout << "Nhap thong tin sinh vien thu " << i + 1 << endl;
-        cout << "Nhap ho ten: ";
-        getline(cin, SV[i].HoTen);
-        cout << "Nhap nam sinh: ";
-        getline(cin, SV[i].NamSinh);
-        cout << "Nhap so bao danh: ";
-        cin >> SV[i].SBD;
-        cout << "Nhap diem toan: ";
-        cin >> SV[i].Diem.Toan;
-        cout << "Nhap diem ly: ";
-        cin >> SV[i].Diem.Ly;
-        cin.ignore();
-        SV[i].Diem.DiemTB = (SV[i].Diem.Toan + SV[i].Diem.Ly) / 2;
-    }
-    cout << "Thong tin sinh vien" << endl;
-    for (int i = 0; i < SoSV; i++) {
-        cout << "Ho ten: " << SV[i].HoTen << endl;
-        cout << "Nam sinh: " << SV[i].NamSinh << endl;
-        cout << "So bao danh: " << SV[i].SBD << endl;
-        cout << "Diem toan: " << SV[i].Diem.Toan << endl;
-        cout << "Diem ly: " << SV[i].Diem.Ly << endl;
-        cout << "Diem trung binh: " << SV[i].Diem.DiemTB << endl;
-    }
+    Vector v1, v2;
+    cout << "Nhap v1: ";
+    Nhap(v1);
+    cout << "Nhap v2: ";
+    Nhap(v2);
+    cout << "v1: ";
+    Xuat(v1);
+    cout << "v2: ";
+    Xuat(v2);
+    cout << "Tong 2 vector: ";
+    v1.VectorAddition(v2);
+    Xuat(v1);
     return 0;
 }
