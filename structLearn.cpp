@@ -1,48 +1,39 @@
 #include <iostream>
+
 using namespace std;
 
-struct fraction{
-    int numerator, denominator;
-    fraction (int _numerator, int _denominator){
-        // them code cua ban o day
-        numerator = _numerator;
-        denominator = _denominator;
+struct complexNumber
+{
+    double realPart,imaginaryPart;
+    complexNumber()
+    {
+        realPart = 0;
+        imaginaryPart = 0;
     }
-    fraction(){
-        // them code cua ban o day
-        numerator = 0;
-        denominator = 1;
+    complexNumber(double initRealPart,double initImaginaryPart)
+    {
+        // your code here
+        realPart = initRealPart;
+        imaginaryPart = initImaginaryPart;
     }
-    fraction Simpler(){
-        // them code cua ban o day
-        int a = numerator;
-        int b = denominator;
-        while (b != 0){
-            int temp = a % b;
-            a = b;
-            b = temp;
-        }
-        numerator /= a;
-        denominator /= a;
-        return *this;
+    complexNumber multiply(complexNumber other)
+    {
+        // your code here
+        complexNumber result;
+        result.realPart = realPart * other.realPart - imaginaryPart * other.imaginaryPart;
+        result.imaginaryPart = realPart * other.imaginaryPart + imaginaryPart * other.realPart;
+        return result;
     }
 };
 
-fraction add(fraction a, fraction b){
-    // them code cua ban o day
-    fraction c;
-    c.numerator = a.numerator * b.denominator + b.numerator * a.denominator;
-    c.denominator = a.denominator * b.denominator;
-    c.Simpler();
-    return c;
-} 
-
-int main() {
-    // them code cua ban o day
-    int a,b;
-    cin >> a >> b;
-    fraction F1(a,b);
-    cin >> a >> b;
-    fraction F2(a,b);
-    cout << add(F1,F2).numerator << "/" << add(F1,F2).denominator << endl;
+int main()
+{
+    double realPart,imaginaryPart;
+    cin >> realPart >> imaginaryPart;
+    complexNumber complex1(realPart,imaginaryPart);
+    cin >> realPart >> imaginaryPart;
+    complexNumber complex2(realPart,imaginaryPart);
+    complexNumber product = complex1.multiply(complex2);
+    cout << product.realPart << " " << product.imaginaryPart << endl;
+    return 0;
 }
