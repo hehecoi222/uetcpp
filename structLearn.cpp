@@ -1,27 +1,48 @@
 #include <iostream>
 using namespace std;
 
-struct cylinder{
-    int radius,high;
-    cylinder (int _radius, int _high){
+struct fraction{
+    int numerator, denominator;
+    fraction (int _numerator, int _denominator){
         // them code cua ban o day
-        radius = _radius;
-        high = _high;
+        numerator = _numerator;
+        denominator = _denominator;
     }
-    double getSurfaceArea(){
+    fraction(){
         // them code cua ban o day
-        return 2*3.14*radius*high + 2*3.14*radius*radius;
+        numerator = 0;
+        denominator = 1;
     }
-    double getVolume(){
+    fraction Simpler(){
         // them code cua ban o day
-        return 3.14*radius*radius*high;
+        int a = numerator;
+        int b = denominator;
+        while (b != 0){
+            int temp = a % b;
+            a = b;
+            b = temp;
+        }
+        numerator /= a;
+        denominator /= a;
+        return *this;
     }
 };
 
+fraction add(fraction a, fraction b){
+    // them code cua ban o day
+    fraction c;
+    c.numerator = a.numerator * b.denominator + b.numerator * a.denominator;
+    c.denominator = a.denominator * b.denominator;
+    c.Simpler();
+    return c;
+} 
+
 int main() {
     // them code cua ban o day
-    int radius,high;
-    cin >> radius >> high;
-    cylinder c(radius,high);
-    cout << c.getSurfaceArea() << " "<< c.getVolume();
+    int a,b;
+    cin >> a >> b;
+    fraction F1(a,b);
+    cin >> a >> b;
+    fraction F2(a,b);
+    cout << add(F1,F2).numerator << "/" << add(F1,F2).denominator << endl;
 }
