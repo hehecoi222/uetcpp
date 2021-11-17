@@ -1,39 +1,42 @@
 #include <iostream>
+#include <iomanip>
+#include <cmath>
 
 using namespace std;
 
-struct complexNumber
+struct triangle
 {
-    double realPart,imaginaryPart;
-    complexNumber()
-    {
-        realPart = 0;
-        imaginaryPart = 0;
+    int edge1,edge2,edge3;
+    bool Valid(){
+        return edge1 + edge2 > edge3 && edge1 + edge3 > edge2 && edge2 + edge3 > edge1;
     }
-    complexNumber(double initRealPart,double initImaginaryPart)
+    triangle(int initEdge1,int initEdge2, int initEdge3)
     {
         // your code here
-        realPart = initRealPart;
-        imaginaryPart = initImaginaryPart;
+        edge1 = initEdge1;
+        edge2 = initEdge2;
+        edge3 = initEdge3;
     }
-    complexNumber multiply(complexNumber other)
+
+    double getArea()
     {
         // your code here
-        complexNumber result;
-        result.realPart = realPart * other.realPart - imaginaryPart * other.imaginaryPart;
-        result.imaginaryPart = realPart * other.imaginaryPart + imaginaryPart * other.realPart;
-        return result;
+        double s = (edge1 + edge2 + edge3) / 2;
+        return sqrt(s * (s - edge1) * (s - edge2) * (s - edge3));
     }
 };
 
 int main()
 {
-    double realPart,imaginaryPart;
-    cin >> realPart >> imaginaryPart;
-    complexNumber complex1(realPart,imaginaryPart);
-    cin >> realPart >> imaginaryPart;
-    complexNumber complex2(realPart,imaginaryPart);
-    complexNumber product = complex1.multiply(complex2);
-    cout << product.realPart << " " << product.imaginaryPart << endl;
+    int edge1,edge2,edge3;
+    cin >> edge1 >> edge2 >> edge3;
+    triangle tri(edge1,edge2,edge3);
+    if (!tri.Valid()){
+        cout << "invalid";
+        return 1;
+    }
+    double area = tri.getArea();
+    if (area == -1) cout << "invalid" << endl;
+    else cout << fixed << setprecision(2) << area << endl;
     return 0;
 }
