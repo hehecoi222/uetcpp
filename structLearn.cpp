@@ -1,42 +1,37 @@
 #include <iostream>
-#include <iomanip>
-#include <cmath>
 
 using namespace std;
 
-struct triangle
+struct Time
 {
-    int edge1,edge2,edge3;
-    bool Valid(){
-        return edge1 + edge2 > edge3 && edge1 + edge3 > edge2 && edge2 + edge3 > edge1;
-    }
-    triangle(int initEdge1,int initEdge2, int initEdge3)
+    int hour, minute, second;
+    Time(int initHour, int initMinute, int initSecond)
     {
-        // your code here
-        edge1 = initEdge1;
-        edge2 = initEdge2;
-        edge3 = initEdge3;
+        //your code here
+        hour = initHour;
+        minute = initMinute;
+        second = initSecond;
     }
-
-    double getArea()
+    void getTimeDifference(Time other)
     {
-        // your code here
-        double s = (edge1 + edge2 + edge3) / 2;
-        return sqrt(s * (s - edge1) * (s - edge2) * (s - edge3));
+        //your code here
+        long int totalSeconds = (hour * 3600) + (minute * 60) + second;
+        long int otherTotalSeconds = (other.hour * 3600) + (other.minute * 60) + other.second;
+        long int difference = abs(totalSeconds - otherTotalSeconds);
+        hour = difference / 3600;
+        minute = (difference % 3600) / 60;
+        second = difference % 60;
     }
 };
 
 int main()
 {
-    int edge1,edge2,edge3;
-    cin >> edge1 >> edge2 >> edge3;
-    triangle tri(edge1,edge2,edge3);
-    if (!tri.Valid()){
-        cout << "invalid";
-        return 1;
-    }
-    double area = tri.getArea();
-    if (area == -1) cout << "invalid" << endl;
-    else cout << fixed << setprecision(2) << area << endl;
+    int hour, minute, second;
+    cin >> hour >> minute >> second;
+    Time time1(hour,minute,second);
+    cin >> hour >> minute >> second;
+    Time time2(hour,minute,second);
+    time1.getTimeDifference(time2);
+    printf("%02d:%02d:%02d\n", time1.hour, time1.minute, time1.second);
     return 0;
 }
