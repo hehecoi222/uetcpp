@@ -1,25 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int findRadius(vector<int> houses, vector<int> heaters) {
-    if (houses.empty() || heaters.empty()) return 0;
-    if( houses.size() < heaters.size() && *houses.end() > *heaters.end()) return 0;
-    int res = 0;
-    for (auto i = houses.begin(); i != houses.end();i++){
-        int min_dis = INT_MAX;
-        for (auto j = heaters.begin(); j != heaters.end();j++){
-            int dis = abs(*i - *j);
-            if (dis < min_dis)
-                min_dis = dis;
-        }
-        res = max(res, min_dis);
+string reverse(string s) {
+    string r = "";
+    for (int i = s.size() - 1; i >= 0; i--) {
+        r += s[i];
     }
-    return res;
+    return r;
+}
+
+string multiply(string s, int n) {
+    string ans= "";
+    int j =0;
+    for (int i=0; i<s.size(); i++) {
+        int x = (s[i] - '0')*n;
+        while (x) {
+            ans += (x % 10) + '0';
+            x /= 10;
+        }
+    }
+    return ans;
 }
 
 int main(){
-    vector<int> houses = {1,2,3,4};
-    vector<int> heaters = {1,4};
-    cout << findRadius(houses, heaters) << endl;
-    return 0;
+    string s;
+    cin >> s;
+    int n;
+    cin >> n;
+    cout << multiply(s, n) << endl;
 }
