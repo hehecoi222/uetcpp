@@ -1,30 +1,110 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int integerReplacement (char * path) {
-    ifstream fin(path);
-    if (!fin.is_open()) {
+bool reDefine(vector<vector<char>> &board,int size) {
+    bool **visited = new bool*[size];
+    for(int i=0;i<size;i++) {
+        visited[i] = new bool[size];
+        for(int j=0;j<size;j++) {
+            visited[i][j] = false;
+        }
+    }
+    bool flag = false;
+    for (int i=0;i<size;i++){
+        for (int j=0;j<size;j++) {
+            bool Down=true,Right=true;
+            if (i != size-1) {
+                if (board[i][j] != board[i+1][j]) {
+                    Down = false;
+                }
+            } else Down = false;
+            if (j != size-1) {
+                if (board[i][j] != board[i][j+1]) {
+                    Right = false;
+                }
+            } else Right = false;
+            if (Down||Right) {
+                visited[i][j] = true;
+                continue;
+            } else {
+                bool Up=true,Left=true;
+                if (i != 0) {
+                    if (board[i][j] != board[i-1][j]) {
+                        flag = true;
+                        board[i][j] = board[i-1][j];
+                        visited[i][j] = true;
+                        continue;
+                    }
+                } else Up = false;
+                if (j != 0) {
+                    if (board[i][j] != board[i][j-1]) {
+                        flag = true;
+                        board[i][j] = board[i][j-1];
+                        visited[i][j] = true;
+                        continue;
+                    }
+                } else Left = false;
+                if (!Up&&!Left) {
+                    flag = true;
+                    board[i][j] = board[i+1][j];
+                    visited[i][j] = true;
+                }
+            }
+        }
+    }
+    cout << "After: " << endl;
+    for (int i=0;i<size;i++){
+        for (int j=0;j<size;j++) {
+            cout << board[i][j] << " ";
+        }
+        cout << endl;
+    }
+    return flag;
+}
+
+int getWinner (char * path) {
+    ifstream file(path);
+    if (!file.is_open()) {
         cout << "File not found" << endl;
         return -1;
     }
-    long int n;
-    fin >> n;
-    vector<int> arr;
-    arr.push_back(0);
-    arr.push_back(0);
-    arr.push_back(1);
-    for (long int i=3;i<=n;i++) {
-        if (i%2 ==0) {
-            arr.push_back(arr[i/2]+1);
-        } else {
-            arr.push_back(min(arr[i-1],1+arr[(i+1)/2]) +1);
+    int n;
+    vector<vector<char>> board;
+    file >> n;
+    for (int i = 0; i < n; i++) {
+        vector<char> row;
+        for (int j = 0; j < n; j++) {
+            char c;
+            file >> c;
+            if (file && c != ' ') row.push_back(c);
+        }
+        board.push_back(row);
+    }
+    file.close();
+    for (bool flag = false; !flag;) {
+        flag = !reDefine(board,n);
+    }
+    int BlackArea = 0, WhiteArea = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (board[i][j] == 'X') {
+                BlackArea++;
+            } else if (board[i][j] == 'O') {
+                WhiteArea++;
+            }
         }
     }
-    fin.close();
-    return arr[n];
+    cout << "Black Area: " << BlackArea << endl;
+    cout << "White Area: " << WhiteArea << endl;
+    if (BlackArea > WhiteArea) {
+        return -1;
+    } else if (BlackArea < WhiteArea) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 int main() {
-    cout << integerReplacement("data/1.txt");
-    return 0;
+    cout << getWinner("data/1.txt") << endl;
 }
