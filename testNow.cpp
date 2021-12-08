@@ -1,31 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string reverse(string s) {
-    string r = "";
-    for (int i = s.size() - 1; i >= 0; i--) {
-        r += s[i];
-    }
-    return r;
-}
-
-string multiply(string s, int n) {
-    string ans= "";
-    int j =0;
-    for (int i=0; i<s.size(); i++) {
-        int x = (s[i] - '0')*n;
-        while (x) {
-            ans += (x % 10) + '0';
-            x /= 10;
+bool canPlaceFlowers (int flowerbed[], int n, int k) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (flowerbed[i] == 0) {
+            if (i == 0 || flowerbed[i - 1] == 0) {
+                if (i == n - 1 || flowerbed[i + 1] == 0) {
+                    count++;
+                }
+            }
         }
     }
-    return ans;
+    return count >= k; 
 }
 
-int main(){
-    string s;
-    cin >> s;
-    int n;
-    cin >> n;
-    cout << multiply(s, n) << endl;
+bool isUgly(int n) {
+    if (n == 0) return false;
+    while (n % 2 == 0) n /= 2;
+    while (n % 3 == 0) n /= 3;
+    while (n % 5 == 0) n /= 5;
+    return n == 1; 
+}
+
+bool judgeSquareSum (int number) {
+    for (int i = 0; i * i <= number; i++) {
+        int j = sqrt(number - i * i);
+        if (i * i + j * j == number) return true;
+    }
+    return false;
 }
